@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+CURRENT_DIR=$(pwd)
+SOLVER_DIR=$CURRENT_DIR/$1
+FUZZED_TESTS_LOC=$CURRENT_DIR/fuzzed-tests # Folder for formed inputs (for mutation, todo)
+GENERATED_COUNTER=0
+SAVED_TESTS_COUNTER=0
+export UBSAN_OPTIONS=halt_on_error=false
+export ASAN_OPTIONS=halt_on_error=false
+
+# Delete and rebuild fuzzed test folder
+rm -rf "$FUZZED_TESTS_LOC"
+mkdir -p "$FUZZED_TESTS_LOC"
+
+# Invoke ub for coverage tools
+cd "$1"
+cd "$CURRENT_DIR"
+
+
+
+java FuzzerRuntime $1 $2
